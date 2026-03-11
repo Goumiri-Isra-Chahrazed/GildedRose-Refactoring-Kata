@@ -9,7 +9,9 @@ export class Item {
     this.quality = quality;
   }
 }
-
+const AGED_BRIE = 'Aged Brie';
+const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
+const SULFURAS = 'Sulfuras, Hand of Ragnaros';
 export class GildedRose {
   items: Array<Item>;
 
@@ -17,15 +19,15 @@ export class GildedRose {
     this.items = items;
   }
  private isAgedBrie(item: Item) {
-    return item.name === 'Aged Brie';
+    return item.name === AGED_BRIE;
   }
 
   private isBackstage(item: Item) {
-    return item.name === 'Backstage passes to a TAFKAL80ETC concert';
+    return item.name === BACKSTAGE;
   }
 
   private isSulfuras(item: Item) {
-    return item.name === 'Sulfuras, Hand of Ragnaros';
+    return item.name === SULFURAS;
   }
 
   private increaseQuality(item: Item, amount = 1) {
