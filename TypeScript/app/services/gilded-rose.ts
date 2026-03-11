@@ -28,7 +28,9 @@ export class GildedRose {
   private decreaseQuality(item: Item, amount = 1) {
     item.quality = Math.max(0, item.quality - amount);
   }
-
+private isExpired(item: Item): boolean {
+  return item.sellIn < 0;
+}
   /**
  * Updates a single item according to Gilded Rose business rules.
  * Extracted from updateQuality to improve readability and maintainability.
@@ -40,10 +42,10 @@ export class GildedRose {
 
   if (this.isAgedBrie(item)) {
     this.increaseQuality(item);
-    if (item.sellIn < 0) this.increaseQuality(item); // extra increase after sellIn
+    if (this.isExpired(item)) this.increaseQuality(item); // extra increase after sellIn
   }
   else if (this.isBackstage(item)) {
-    if (item.sellIn < 0) {
+    if (this.isExpired(item)) {
       item.quality = 0; // After concert, quality drops to 0
     } else {
       this.increaseQuality(item);
@@ -53,7 +55,7 @@ export class GildedRose {
   }
   else {
     this.decreaseQuality(item);
-    if (item.sellIn < 0) this.decreaseQuality(item); // degrade faster after sellIn
+    if (this.isExpired(item)) this.decreaseQuality(item); // degrade faster after sellIn
   }
 }
 updateQuality() {
