@@ -35,33 +35,33 @@ export class GildedRose {
   private decreaseQuality(item: Item, amount = 1) {
     item.quality = Math.max(0, item.quality - amount);
   }
-updateQuality() {
-  for (const item of this.items) {
-    if (this.isSulfuras(item)) continue;
+  private updateItem(item: Item) {
+  if (this.isSulfuras(item)) return; // Sulfuras never changes
 
-    if (this.isAgedBrie(item)) {
-      this.increaseQuality(item);
-    } else if (this.isBackstage(item)) {
-      this.increaseQuality(item);
-      if (item.sellIn < 11) this.increaseQuality(item);
-      if (item.sellIn < 6) this.increaseQuality(item);
-    } else {
-      this.decreaseQuality(item);
-    }
+  item.sellIn -= 1; // Every other item decreases sellIn
 
-    item.sellIn -= 1;
-
+  if (this.isAgedBrie(item)) {
+    this.increaseQuality(item);
+    if (item.sellIn < 0) this.increaseQuality(item); // extra increase after sellIn
+  }
+  else if (this.isBackstage(item)) {
     if (item.sellIn < 0) {
-      if (this.isAgedBrie(item)) {
-        this.increaseQuality(item);
-      } else if (this.isBackstage(item)) {
-        item.quality = 0;
-      } else {
-        this.decreaseQuality(item);
-      }
+      item.quality = 0; // After concert, quality drops to 0
+    } else {
+      this.increaseQuality(item);
+      if (item.sellIn < 10) this.increaseQuality(item);
+      if (item.sellIn < 5) this.increaseQuality(item);
     }
   }
-
+  else {
+    this.decreaseQuality(item);
+    if (item.sellIn < 0) this.decreaseQuality(item); // degrade faster after sellIn
+  }
+}
+updateQuality() {
+  for (const item of this.items) {
+    this.updateItem(item);
+  }
   return this.items;
 }
 }
