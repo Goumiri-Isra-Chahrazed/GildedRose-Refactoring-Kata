@@ -1,14 +1,5 @@
-export class Item {
-  name: string;
-  sellIn: number;
-  quality: number;
-
-  constructor(name: string, sellIn: number, quality: number) {
-    this.name = name;
-    this.sellIn = sellIn;
-    this.quality = quality;
-  }
-}
+import { Item } from "@/models/Item";
+export { Item } from "@/models/Item";
 const AGED_BRIE = 'Aged Brie';
 const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
 const SULFURAS = 'Sulfuras, Hand of Ragnaros';
@@ -37,6 +28,11 @@ export class GildedRose {
   private decreaseQuality(item: Item, amount = 1) {
     item.quality = Math.max(0, item.quality - amount);
   }
+
+  /**
+ * Updates a single item according to Gilded Rose business rules.
+ * Extracted from updateQuality to improve readability and maintainability.
+ */
   private updateItem(item: Item) {
   if (this.isSulfuras(item)) return; // Sulfuras never changes
 
