@@ -34,9 +34,10 @@ npm run test:mocha
 1. ♻️ Separated the **Item model** from the **GildedRose service** for better project structure.  
 2. 🧩 Introduced **helper methods** (`isAgedBrie`, `isBackstage`, `isSulfuras`, `isConjured`, `increaseQuality`, `decreaseQuality`, `isExpired`) to simplify and clarify item update logic.  
 3. 🔄 Refactored `updateQuality` to iterate cleanly over all items and delegate updates to the helper methods.  
-4. ✨ Added support for **Conjured items**, which degrade in quality twice as fast.  
-5. ✅ Ensured **all tests pass**, including Jest snapshot and unit tests.  
-6. 🎨 Used **Gitmoji** in commits to clearly indicate the type of changes made (refactoring, features, fixes, improvements).  
+4. ✨ Added support for **Conjured items**, which degrade in quality twice as fast. 
+5. 🎨 Extract helpers out of the gilded rose service. 
+6. ✅ Ensured **all tests pass**, including Jest snapshot and unit tests.  
+7. 💄 Used **Gitmoji** in commits to clearly indicate the type of changes made (refactoring, features, fixes, improvements).  
 
 
 ## Run the TextTest fixture from the Command-Line
