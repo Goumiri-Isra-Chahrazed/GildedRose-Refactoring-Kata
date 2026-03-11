@@ -9,7 +9,7 @@ import {
   increaseQuality,
   decreaseQuality,
   isExpired
-} from './gilded-rose.helpers';
+} from '../helpers/gilded-rose.helpers';
 
 export class GildedRose {
   items: Array<Item>;
